@@ -8,4 +8,9 @@ export default class ProductController {
     const product = await this.productService.create(req.body);
     return res.status(201).json(product);
   }
+
+  async findAll(_req: Request, res: Response): Promise<void> {
+    const result = await this.productService.findAll();
+    res.status(200).json(result);
+  }
 }

@@ -25,5 +25,9 @@ export default class ProductService {
     this.validateNewProduct(product);
     const newProduct = this.productModel.create(product);
     return newProduct;
-  } 
+  }
+  
+  async findAll(): Promise<Iproduct[]> {
+    return this.productModel.findAll();
+  }
 }
