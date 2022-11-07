@@ -8,6 +8,7 @@ const errorMiddleware = (
   _next: NextFunction,
 ) => {
   const statusCode = error.statusCode ?? 400;
+
   return res.status(statusCode).json({ message: error.message });
 };
 

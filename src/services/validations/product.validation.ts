@@ -8,7 +8,7 @@ const productValidation = (product: Iproduct) => {
     amount: Joi.string().min(3).required(),
   });
 
-  const { error, value } = schema.validate(product);
+  const { value, error } = schema.validate(product);
 
   if (error?.message.includes('required')) {
     throw new ApiError(error.message, 400);
