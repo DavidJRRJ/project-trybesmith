@@ -1,4 +1,4 @@
-import { ResultSetHeader } from 'mysql2';
+import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import IUser from '../interfaces/Iuser';
 import connection from './connection';
 
@@ -11,9 +11,18 @@ export default class UserModel {
       'INSERT INTO Trybesmith.Users (username, classe, level, password) VALUES (?, ?, ?, ?)',
       [username, classe, level, password],
     );
-    
+
     const newUser = { id: insertId, ...user };
-    
+
     return newUser;
-  } 
+  }
+
+  async findOne(user: string): Promise<IUser> {
+    const [[result]] = await this.connection.execute<(
+    IUser & RowDataPacket)[]>(
+      'SELECT * FROM Trybesmith.Users WHERE username = ?',
+      [user],
+      );
+    return result;
+  }
 }
